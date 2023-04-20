@@ -1,7 +1,7 @@
-#Validacion de usuarios
+# Validacion de usuarios
 Aquí va una breve descripción del proyecto.
 
-##Dependencias de producción:
+## Dependencias de producción:
 - **`bcrypt`**: Biblioteca para encriptar contraseñas.
 - **`cors`**: Middleware para habilitar CORS en Express.
 - **`dotenv`**: Biblioteca para cargar variables de entorno desde un archivo .env.
@@ -9,7 +9,7 @@ Aquí va una breve descripción del proyecto.
 - **`express-validator`**: Biblioteca para validar datos en Express.
 - **`mongoose`**: Biblioteca para conectarse y manipular bases de datos MongoDB.
 
-##Dependencias de desarrollo:
+## Dependencias de desarrollo:
 - **`eslint`**: Herramienta para encontrar y corregir problemas en el código.
 - **`typescript`**: Lenguaje de programación tipado para JavaScript.
 
@@ -26,7 +26,7 @@ El router también utiliza los middlewares existUserById, existEmail, isRoleVali
 - **`userCtrlPut`**: Controlador para actualizar un usuario
 - **`userCtrlDelete`**: Controlador para eliminar un usuario
 
-##Services de Usuarios
+## Services de Usuarios
 - **`getAllUsers`**: Recibe una solicitud req de Express que puede contener parámetros de consulta para la paginación (limit y from) y devuelve una promesa que resuelve en una tupla que contiene el número total de usuarios y un arreglo de objetos de usuario que cumplen con los parámetros de paginación y que tienen estado true.
 
 - **`createNewUser`**: Recibe un objeto req que representa los datos de un nuevo usuario a crear, y devuelve una promesa que resuelve en el objeto de usuario creado. Antes de guardar el usuario en la base de datos, la contraseña del usuario se cifra con la función encrypt que se importa desde el módulo helpers.
