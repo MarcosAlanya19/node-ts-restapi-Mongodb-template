@@ -1,59 +1,54 @@
 import { Request, Response } from 'express';
-import { User } from '../database/user.schema';
-import * as usersService from '../services/user.service';
+import * as userService from '../services/user.service';
 
-export const usersCtrlGet = async (req: Request, res: Response) => {
+// Controlador para obtener todos los usuarios
+export const usersCtrlGet = async (req: Request, res: Response): Promise<void> => {
+  const [total, usuarios] = await userService.getAllUsers(req);
+
   try {
-    const posts = await usersService.getAllUsers();
-    res.status(200).send(posts);
+    res.status(200).json({ total, usuarios });
+    return;
   } catch (error: any) {
     res.status(500).json({ msg: error.message });
     return;
   }
 };
 
-export const userCtrlPost = async (req: Request, res: Response) => {
-  const body = req.body;
-  const user = new User(body);
+// Controlador para crear un nuevo usuario
+export const userCtrlPost = async (req: Request, res: Response): Promise<void> => {
+  const user = await userService.createNewUser(req.body);
 
   try {
-    await user.save();
-    res.json({
-      msg: 'post API - controller',
-      user,
-    });
+    res.status(201).json({ user });
+    return;
   } catch (error: any) {
     res.json({ error: error.message });
     return;
   }
 };
 
-export const userCtrlPut = async (req: Request, res: Response) => {
-  const { id } = req.params;
+// Controlador para actualizar un usuario
+export const userCtrlPut = async (req: Request, res: Response): Promise<void> => {
+  const user = await userService.updateUserById(req);
 
   try {
-    const updatePost = await usersService.updateUserById(id, req.body);
-
-    res.status(200).json(updatePost);
+    res.json({ user });
     return;
   } catch (error: any) {
-    res.status(500).json({ msg: error.message });
+    res.json({ error: error.message });
+    return;
   }
 };
 
-export const userCtrlDelete = async (req: Request, res: Response) => {
-  const { id } = req.params;
+// Controlador para eliminar un usuario
+export const userCtrlDelete = async (req: Request, res: Response): Promise<void> => {
+  await userService.deleteUserById(req);
 
   try {
-    const deletePost = await usersService.deleteUserById(id);
-    if (!deletePost) {
-      res.sendStatus(404);
-      return;
-    }
-
     res.sendStatus(204);
     return;
   } catch (error: any) {
     res.status(500).json({ msg: error.message });
+    return;
   }
 };

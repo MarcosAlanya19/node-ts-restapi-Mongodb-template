@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import { dbConnection } from '../database/config.db';
-import { router as userRouter } from '../routes/user.routes';
+import { router as userRouter } from '../routes';
 
 interface ServerConfig {
   port: string;
