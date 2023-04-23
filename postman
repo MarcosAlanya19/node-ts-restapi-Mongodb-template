@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "a943053a-bf8a-458d-a3af-fb6ac8159f65",
+		"name": "Api-Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22863494"
+	},
+	"item": [
+		{
+			"name": "/api/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API}}/api/users",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Daniela\",\r\n    \"google\": true,\r\n    \"new\": true,\r\n    \"email\": \"daniela@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"USER_ROLE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API}}/api/users",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{API}}/api/users/64422adb838d7135243c0476?x-token=abc123",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"64422adb838d7135243c0476"
+					],
+					"query": [
+						{
+							"key": "x-token",
+							"value": "abc123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/:id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Marcos\",\r\n    \"role\": \"USER_ROLE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API}}/api/users/6440ae55ff1deebe8b9e5bc9",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"6440ae55ff1deebe8b9e5bc9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/auth/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"marcos@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API}}/api/auth/login",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "API",
+			"value": "http://localhost:8080"
+		}
+	]
+}
