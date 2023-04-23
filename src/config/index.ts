@@ -7,9 +7,4 @@ export const config = {
   DB: {
     MONGODB_CNN: process.env.MONGODB_CNN,
   },
-  ROLES: {
-    ADMIN_ROLE: process.env.ADMIN_ROLE || 'ADMIN_ROLE',
-    USER_ROLE: process.env.USER_ROLE || 'USER_ROLE',
-    VENTAS_ROLE: process.env.VENTAS_ROLE || 'VENTAS_ROLE',
-  },
 };
