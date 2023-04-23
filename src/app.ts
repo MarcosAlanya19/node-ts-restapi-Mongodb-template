@@ -1,11 +1,10 @@
-import dotenv from 'dotenv';
+import { config } from './config';
 import { Server } from './server';
 
-dotenv.config();
-
 const serverConfig = {
-  port: process.env.PORT ?? '3000',
+  port: config.PORT.toString() ?? '3000',
   userPath: '/api/users',
+  authPath: '/api/auth',
 };
 
 const server = new Server(serverConfig);

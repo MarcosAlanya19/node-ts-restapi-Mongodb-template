@@ -1,16 +1,17 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
+import { config } from '../config';
 import * as userCtrl from '../controllers';
 import * as validator from '../helpers';
-import { validateFields } from '../middlewares';
+import { haveRole, validateFields, validateJWT } from '../middlewares';
 
-export const router = Router();
+export const userRouter = Router();
 
 // Ruta para obtener todos los usuarios
-router.get('/', userCtrl.usersCtrlGet);
+userRouter.get('/', userCtrl.usersCtrlGet);
 
 // Ruta para actualizar un usuario
-router.put(
+userRouter.put(
   '/:id',
   [
     check('id', 'No es un ID válido').isMongoId().custom(validator.existUserById), // Verifica que el ID del usuario sea válido y existe en la base de datos
@@ -21,7 +22,7 @@ router.put(
 );
 
 // Ruta para crear un nuevo usuario
-router.post(
+userRouter.post(
   '/',
   [
     check('name', 'El nombre es obligatorio').not().isEmpty(), // Verifica que el nombre del usuario no esté vacío
@@ -34,8 +35,11 @@ router.post(
 );
 
 // Ruta para eliminar un usuario
-router.delete(
+userRouter.delete(
   '/:id',
+  validateJWT,
+  // isAdminRole,
+  haveRole(config.ROLES.USER_ROLE, config.ROLES.VENTAS_ROLE),
   [
     check('id', 'No es un ID válido').isMongoId().custom(validator.existUserById), // Verifica que el ID del usuario sea válido y existe en la base de datos
     validateFields, // Middleware para validar los campos enviados

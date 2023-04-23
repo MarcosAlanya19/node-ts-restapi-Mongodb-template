@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
+import { RequestWithUUID } from '../interface';
 import * as userService from '../services/user.service';
 
 // Controlador para obtener todos los usuarios
 export const usersCtrlGet = async (req: Request, res: Response): Promise<void> => {
-  const [total, usuarios] = await userService.getAllUsers(req);
+  const [total, user] = await userService.getAllUsers(req);
 
   try {
-    res.status(200).json({ total, usuarios });
+    res.status(200).json({ total, user });
     return;
   } catch (error: any) {
     res.status(500).json({ msg: error.message });
@@ -41,11 +42,16 @@ export const userCtrlPut = async (req: Request, res: Response): Promise<void> =>
 };
 
 // Controlador para eliminar un usuario
-export const userCtrlDelete = async (req: Request, res: Response): Promise<void> => {
-  await userService.deleteUserById(req);
+export const userCtrlDelete = async (
+  req: RequestWithUUID,
+  res: Response
+): Promise<void> => {
+  const user = await userService.deleteUserById(req);
 
   try {
-    res.sendStatus(204);
+    res.status(200).json({
+      user,
+    });
     return;
   } catch (error: any) {
     res.status(500).json({ msg: error.message });

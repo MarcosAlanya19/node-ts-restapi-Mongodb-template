@@ -71,10 +71,11 @@ export const updateUserById = async (req: Request): Promise<Document | null> => 
  * Elimina un usuario de la base de datos
  * @param req Objeto Request de Express con el ID del usuario a eliminar
  */
-export const deleteUserById = async (req: Request): Promise<void> => {
+export const deleteUserById = async (req: Request) => {
   // Extrae el ID del usuario de los parámetros de la petición
   const { id } = req.params;
 
   // Actualiza el estado del usuario a 'false' para indicar que ha sido eliminado
-  await User.findByIdAndUpdate(id, { state: false });
+  const user = await User.findByIdAndUpdate(id, { state: false });
+  return user;
 };

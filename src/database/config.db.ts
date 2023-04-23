@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
+import { config } from '../config';
 
 export const dbConnection = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_CNN || '');
+    await mongoose.connect(config.DB.MONGODB_CNN || '');
 
     console.log('Database connection');
   } catch (error) {

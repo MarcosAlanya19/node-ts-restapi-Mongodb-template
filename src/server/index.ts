@@ -1,11 +1,12 @@
 import cors from 'cors';
 import express from 'express';
 import { dbConnection } from '../database/config.db';
-import { router as userRouter } from '../routes';
+import { authRouter, userRouter } from '../routes';
 
 interface ServerConfig {
   port: string;
   userPath: string;
+  authPath: string;
 }
 
 export class Server {
@@ -26,10 +27,10 @@ export class Server {
   private middlewares = (): void => {
     this.app.use(cors());
     this.app.use(express.json());
-    this.app.use(express.static('public'));
   };
 
   private routes = (): void => {
+    this.app.use(this.config.authPath, authRouter);
     this.app.use(this.config.userPath, userRouter);
   };
 
