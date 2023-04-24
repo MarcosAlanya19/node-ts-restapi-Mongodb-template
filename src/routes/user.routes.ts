@@ -4,6 +4,7 @@ import { config } from '../config';
 import * as userCtrl from '../controllers';
 import * as validator from '../helpers';
 import { haveRole, validateFields, validateJWT } from '../middlewares';
+import { Role } from '../interface';
 
 export const userRouter = Router();
 
@@ -39,7 +40,7 @@ userRouter.delete(
   '/:id',
   validateJWT,
   // isAdminRole,
-  haveRole(config.ROLES.USER_ROLE, config.ROLES.VENTAS_ROLE),
+  haveRole(Role.ADMIN, Role.VENTAS),
   [
     check('id', 'No es un ID válido').isMongoId().custom(validator.existUserById), // Verifica que el ID del usuario sea válido y existe en la base de datos
     validateFields, // Middleware para validar los campos enviados

@@ -1,12 +1,12 @@
 import { NextFunction, Response } from 'express';
-import { config } from '../config';
-import { RequestWithUUID } from '../interface';
+import { RequestWithUUID, Role } from '../interface';
 
 export const isAdminRole = (
   req: RequestWithUUID,
   res: Response,
   next: NextFunction
 ) => {
+  // Verificar de que !req.user exista
   if (!req.user) {
     res.status(500).json({
       msg: 'Se quiere validar, sin saber el role correcto',
@@ -16,7 +16,8 @@ export const isAdminRole = (
 
   const { role, name } = req.user;
 
-  if (role !== config.ROLES.ADMIN_ROLE) {
+  // Verifica que especificamente el rol es admin
+  if (role !== Role.ADMIN) {
     res.status(401).json({
       msg: `${name} no es administrador - No tiene acceso`,
     });
@@ -26,7 +27,7 @@ export const isAdminRole = (
   next();
 };
 
-export const haveRole = (...roles: string[]) => {
+export const haveRole = (...roles: Role[]) => {
   return (req: RequestWithUUID, res: Response, next: NextFunction) => {
     if (!req.user) {
       res.status(500).json({
@@ -35,6 +36,7 @@ export const haveRole = (...roles: string[]) => {
       return;
     }
 
+    // realiza una verificacion en caso se brinde un role, no existente
     if (!roles.includes(req.user.role)) {
       res
         .status(401)

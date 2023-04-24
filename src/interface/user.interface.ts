@@ -1,15 +1,20 @@
 import { Request } from 'express';
 type ObjectId = import('mongoose').Types.ObjectId;
 
+export enum Role {
+  ADMIN = 'ADMIN_ROLE',
+  USER = 'USER_ROLE',
+  VENTAS = 'VENTAS_ROLE',
+}
+
 export interface IUser {
   _id: ObjectId;
   name: string;
   email: string;
   password: string;
-  role: 'ADMIN_ROLE' | 'USER_ROLE';
+  role: Role;
   state: boolean;
   google: boolean;
-  __v: number;
 }
 
 export interface IUserPost {

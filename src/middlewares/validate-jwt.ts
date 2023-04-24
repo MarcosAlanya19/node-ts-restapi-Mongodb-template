@@ -10,6 +10,8 @@ export const validateJWT = async (
   next: NextFunction
 ) => {
   const token = req.header('x-token');
+
+  // Verficacion de que token exista en los headers
   if (!token) {
     res.status(401).json({
       msg: 'No hay token en la petición',
@@ -18,10 +20,12 @@ export const validateJWT = async (
   }
 
   try {
+    // llamada de uuid generado anteriormente, en caso el token sea el mismo que el token generado anteriormente
     const { uuid } = jwt.verify(token, config.SECRET_JWT) as { uuid: string };
 
     // leer el usuario que corresponde al uuid
     const user = await User.findById(uuid);
+
     if (!user) {
       res.status(401).json({
         msg: 'Token no valido - Usuario no existente en DB',
