@@ -27,6 +27,7 @@ export class Server {
   private middlewares = (): void => {
     this.app.use(cors());
     this.app.use(express.json());
+    this.app.use(express.static('public'));
   };
 
   private routes = (): void => {
@@ -36,7 +37,7 @@ export class Server {
 
   public listen = (): void => {
     this.app.listen(this.config.port, () => {
-      console.log(`Server listening on port ${this.config.port}`);
+      console.log(`Server listening on port http://localhost:${this.config.port}/`);
     });
   };
 }

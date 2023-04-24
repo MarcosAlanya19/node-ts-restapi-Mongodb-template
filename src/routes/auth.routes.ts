@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { loginCtrl } from '../controllers';
+import { googleSignIn, loginCtrl } from '../controllers';
 import { validateFields } from '../middlewares';
 
 export const authRouter = Router();
@@ -13,4 +13,10 @@ authRouter.post(
     validateFields,
   ],
   loginCtrl
+);
+
+authRouter.post(
+  '/google',
+  [check('id_token', 'id_token es necesario').not().isEmpty(), validateFields],
+  googleSignIn
 );
