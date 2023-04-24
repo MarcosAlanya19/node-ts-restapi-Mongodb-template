@@ -1,5 +1,7 @@
 # Validacion de usuarios
 En esta parte del proyecto se logea con un cuenta de google existente, donde se jalara la data requerida, para su uso, asimismo con un btn de deslogueo.
+## Codigo Fuente - Fernando Herrera
+https://github.com/Klerith/curso-node-restserver/tree/google-signin-updated
 ## Guia Google
 https://developers.google.com/identity/gsi/web/guides/verify-google-id-token?hl=es-419
 ## EndPoints
