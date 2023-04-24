@@ -27,6 +27,8 @@
     >
     </div>
 
+    <button id="google_signout"> Signout </button>
+
     <script>
       function handleCredentialResponse(response) {
         const body = { id_token: response.credential };
@@ -39,9 +41,21 @@
           body: JSON.stringify(body),
         })
           .then((resp) => resp.json())
-          .then((resp) => console.log(resp))
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem('email', data.user.email);
+          })
           .catch(console.warn);
       }
+
+      const $btn = document.getElementById('google_signout');
+      $btn.onclick = () => {
+        google.accounts.id.disableAutoSelect();
+        google.accounts.id.revoke(localStorage.getItem('email'), done => {
+          localStorage.clear()
+          location.reload()
+        })
+      };
     </script>
   </body>
 </html>

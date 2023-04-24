@@ -58,9 +58,8 @@ export const googleSignIn = async (req: Request, res: Response) => {
       const data = {
         name,
         email,
-        password: ';P',
+        password: ':P',
         img,
-        role: 'USER_ROLE',
         google: true,
       };
 
@@ -82,6 +81,7 @@ export const googleSignIn = async (req: Request, res: Response) => {
     res.json({
       msg: 'Todo bien',
       token,
+      user,
     });
   } catch (error) {
     res.status(400).json({
