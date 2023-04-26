@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { User } from '../database/user.schema';
+import { User } from '../models/user.schema';
 import * as usersService from '../services/user.service';
 
 export const usersCtrlGet = async (req: Request, res: Response) => {

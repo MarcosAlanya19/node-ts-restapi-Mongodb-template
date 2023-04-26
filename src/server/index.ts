@@ -8,6 +8,11 @@ interface ServerConfig {
   userPath: string;
 }
 
+export const serverConfig = {
+  port: process.env.PORT ?? '3000',
+  userPath: '/api/users',
+};
+
 export class Server {
   private app: express.Application;
 

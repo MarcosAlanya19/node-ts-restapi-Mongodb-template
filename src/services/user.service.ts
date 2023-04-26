@@ -1,4 +1,4 @@
-import { User } from '../database/user.schema';
+import { User } from '../models/user.schema';
 import { IUser } from '../interface/user.interface';
 
 export const getAllUsers = async () => {
